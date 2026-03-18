@@ -1,9 +1,9 @@
 import { Alert, Grid, Typography, type AlertProps } from "@mui/material";
 import { useState } from "react";
-import type { ProductTableBodyProps } from "~/interfaces/ProductTableBodyProps";
+import type {Products} from "~/interfaces/Product";
 import { ProductTable } from "~/productTable/product-table";
 
-export default function Products(rows: Array<ProductTableBodyProps>) {
+export default function Products( products : Products) {
   const [displayAlert, setDisplayAlert] = useState<boolean>(false);
   const [alertStatus, setAlertStatus] = useState<AlertProps['severity']>('success');
   const [alertMessage, setAlertMessage] = useState<string>("");
@@ -27,7 +27,7 @@ export default function Products(rows: Array<ProductTableBodyProps>) {
             <Typography variant="h1"> Products</Typography>
           </header>
           <section>
-            <ProductTable rows={rows} />
+            <ProductTable products={products} />
           </section>
         </Grid>
       </div>

@@ -5,11 +5,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import type { ProductTableProps } from '~/types/ProductTableProps';
 import { ProductTableBody } from './product-table-body';
-import type { ProductTableBodyProps } from '~/interfaces/ProductTableBodyProps';
 
+export function ProductTable({products}: ProductTableProps) {
 
-export function ProductTable(props: { rows: Array<ProductTableBodyProps>}) {
   return (
      <TableContainer component={Paper}>
       <Table >
@@ -22,7 +22,7 @@ export function ProductTable(props: { rows: Array<ProductTableBodyProps>}) {
             <TableCell align="center">Price</TableCell>
           </TableRow>
         </TableHead>
-        <ProductTableBody rows={props.rows} />
+        <ProductTableBody products={products} />
       </Table>
     </TableContainer>
   );

@@ -1,12 +1,14 @@
-import type { ProductTableBodyProps } from "~/interfaces/ProductTableBodyProps";
 import { ProductTableRow } from "./product-table-row";
 import { TableBody } from "@mui/material";
+import type {Product} from "~/interfaces/Product";
+import type { ProductTableProps } from "~/types/ProductTableProps";
 
-export function ProductTableBody(rows: Array<ProductTableBodyProps>) {
+
+export function ProductTableBody({products}: ProductTableProps) {
 return (
         <TableBody>
-          {rows.map((row: ProductTableBodyProps) => (
-            <ProductTableRow key={row.name} {...row} />
+          {products.items.map((item: Product) => (
+            <ProductTableRow key={item.name} item={item}/>
           ))}
         </TableBody>
 );

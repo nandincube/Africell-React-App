@@ -1,0 +1,1 @@
+export type Allergen = "Gluten" | "Peanuts" | "Dairy" | "Soy" | "Eggs" | "Fish" | "Shellfish"
