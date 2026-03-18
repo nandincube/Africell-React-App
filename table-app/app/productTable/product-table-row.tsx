@@ -3,16 +3,17 @@ import type { Allergen } from "../types/Allergen"
 import type { Product } from "../interfaces/Product"
 
 type ProductTableRowProps = {
+  key: string,
   item: Product
 }
-export function ProductTableRow({ item }: ProductTableRowProps) {
+export function ProductTableRow({key, item}: ProductTableRowProps) {
   const allergenChip = (allergen: Allergen) => {
     return (<Chip label={allergen} color="secondary" />)
   }
 
   return (
     <TableRow
-      key={item.name}
+      key={key}
     >
       <TableCell component="td" scope="row">
         {item.stock}

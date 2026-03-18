@@ -2,7 +2,7 @@ import { Alert, Grid, Typography, type AlertProps } from "@mui/material";
 import { useState } from "react";
 import type {Products} from "~/interfaces/Product";
 import { ProductTable } from "~/productTable/product-table";
-import { useGetAllProductsQuery } from "~/state/apiSlice";
+import { useGetAllProductsQuery } from "~/state/rtk/apiSlice";
 
 export default function Products( products : Products) {
   const [displayAlert, setDisplayAlert] = useState<boolean>(false);
@@ -19,7 +19,6 @@ export default function Products( products : Products) {
     return <Alert severity={status} onClose={() => setDisplayAlert(false)}>{message}</Alert>;
   }
 
-
   return (
     <main>
       <div>
@@ -29,7 +28,8 @@ export default function Products( products : Products) {
             <Typography variant="h1"> Products</Typography>
           </header>
           <section>
-            <ProductTable products={products} />
+            {data &&
+            <ProductTable products={data} />}
           </section>
         </Grid>
       </div>
