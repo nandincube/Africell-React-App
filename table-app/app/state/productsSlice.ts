@@ -1,6 +1,9 @@
 
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { Product, Products } from '~/interfaces/Product'
+
+const baseUrl: string = "http://localhost:3000"
+
 export const productsSlice = createSlice({
     name: 'products',
     initialState: {
@@ -11,18 +14,18 @@ export const productsSlice = createSlice({
         builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
             state.items = action.payload
         })
-            .addCase(fetchAddProduct.fulfilled, (state, action:PayloadAction<Product>) => {
+            .addCase(fetchAddProduct.fulfilled, (state, action: PayloadAction<Product>) => {
                 state.items.push(action.payload)
             })
             .addCase(fetchUpdateProduct.fulfilled, (state, action: PayloadAction<Product>) => {
                 let index = state.items.findIndex((item) => {
-                    item.name === action.payload.name
+                    return item.name === action.payload.name
                 })
                 state.items[index] = action.payload
             })
-            .addCase(fetchDeleteProduct.fulfilled, (state, action: PayloadAction<Product>) => {
+            .addCase(fetchDeleteProduct.fulfilled, (state, action: PayloadAction<string>) => {
                 state.items = state.items.filter((item) => {
-                    item.name !== action.payload.name
+                    return item.name !== action.payload
                 })
             })
     },
@@ -30,33 +33,36 @@ export const productsSlice = createSlice({
 
 export const fetchDeleteProduct = createAsyncThunk(
     'products/fetchDeleteProducts',
-    async (name: string) => {
-        return fetch(`/delete-data/${name}`)
-        .then((res)=>{
-            return name
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+    async (name: string, thunkAPI) => {
+        let options = {
+            method: "DELETE"
+        }
+        return fetch(baseUrl + `/prodcts/${name}`, options)
+            .then((res) => {
+                return name
+            })
+            .catch((err) => {
+                return thunkAPI.rejectWithValue("Failed")
+            })
     },
 )
 
 export const fetchAllProducts = createAsyncThunk(
-    'products/fetchAllProducts', async() => {
+    'products/fetchAllProducts', async (i, thunkAPI) => {
 
-        return fetch("/all-data")
+        return fetch(baseUrl + "/products")
             .then((res) => res.json())
             .then((res) => {
                 return res;
             })
             .catch((err) => {
-                console.log(err)
+                return thunkAPI.rejectWithValue("Failed")
             })
     },
 )
 export const fetchAddProduct = createAsyncThunk(
     'products/fetchAddProduct',
-    async (item: Product) => {
+    async (item: Product, thunkAPI) => {
         const options = {
             method: "POST",
             headers: {
@@ -65,18 +71,18 @@ export const fetchAddProduct = createAsyncThunk(
             body: JSON.stringify(item)
         }
 
-        return fetch("/add-product", options)
+        return fetch(baseUrl + "/products", options)
             .then((res) => {
                 return item
             })
             .catch((err) => {
-                console.log(err)
+                return thunkAPI.rejectWithValue("Failed")
             })
     },
 )
 export const fetchUpdateProduct = createAsyncThunk(
     'products/fetchUpdateProduct',
-    async (item: Product) => {
+    async (item: Product, thunkAPI) => {
         const options = {
             method: "PUT",
             headers: {
@@ -84,12 +90,12 @@ export const fetchUpdateProduct = createAsyncThunk(
             },
             body: JSON.stringify(item)
         }
-               return fetch("/update-product", options)
+        return fetch(baseUrl + "/products", options)
             .then((res) => {
                 return item
             })
             .catch((err) => {
-                console.log(err)
+                return thunkAPI.rejectWithValue("Failed")
             })
 
     },

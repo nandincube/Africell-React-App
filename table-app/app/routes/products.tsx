@@ -1,8 +1,9 @@
 import { Alert, Grid, Typography, type AlertProps } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type {Products} from "~/interfaces/Product";
 import { ProductTable } from "~/productTable/product-table";
 import { useAppSelector, useAppDispatch } from 'app/hooks'
+import { fetchAllProducts } from "~/state/productsSlice";
 
 
 export default function ProductsPage() {
@@ -10,6 +11,11 @@ export default function ProductsPage() {
   const [alertStatus, setAlertStatus] = useState<AlertProps['severity']>('success');
   const [alertMessage, setAlertMessage] = useState<string>("");
   const data = useAppSelector((state) => state.products);
+  const dispatch = useAppDispatch()
+
+  useEffect(()=>{
+    dispatch(fetchAllProducts())
+  },[dispatch])
 
   const showAlert = (status: AlertProps['severity'], message: string) => {
     setAlertStatus(status);
