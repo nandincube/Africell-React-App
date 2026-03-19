@@ -5,7 +5,7 @@ import { ProductTable } from "~/productTable/product-table";
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 
 
-export default function Products() {
+export default function ProductsPage() {
   const [displayAlert, setDisplayAlert] = useState<boolean>(false);
   const [alertStatus, setAlertStatus] = useState<AlertProps['severity']>('success');
   const [alertMessage, setAlertMessage] = useState<string>("");
