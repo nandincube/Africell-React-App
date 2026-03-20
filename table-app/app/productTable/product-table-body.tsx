@@ -8,7 +8,7 @@ export function ProductTableBody({products}: ProductTableProps) {
 return (
         <TableBody>
           {products.items.map((item: Product) => (
-            <ProductTableRow key={item.name} item={item}/>
+            <ProductTableRow key={item.id} item={item}/>
           ))}
         </TableBody>
 );

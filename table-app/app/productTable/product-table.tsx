@@ -9,7 +9,6 @@ import { ProductTableBody } from './product-table-body';
 import type { ProductTableProps } from '~/types/ProductTableProps';
 
 export function ProductTable({products}: ProductTableProps) {
-
   return (
      <TableContainer component={Paper}>
       <Table >
@@ -19,7 +18,8 @@ export function ProductTable({products}: ProductTableProps) {
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Description</TableCell>
             <TableCell align="center">Allergens</TableCell>
-            <TableCell align="center">Price</TableCell>
+            <TableCell align="center">Price (£)</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <ProductTableBody products={products} />

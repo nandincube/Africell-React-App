@@ -1,27 +1,22 @@
-import { Chip, TableCell, TableRow } from "@mui/material"
+import { Button, Chip, TableCell, TableRow } from "@mui/material"
 import type { Allergen } from "../types/Allergen"
 import type { Product } from "../interfaces/Product"
 import { useAppDispatch } from "~/hooks"
-import { fetchAddProduct, fetchDeleteProduct, fetchUpdateProduct } from "~/state/productsSlice"
+import {deleteProduct, addProduct, updateProduct} from "~/state/productsSlice"
+import { useState } from "react"
+import { ProductForm } from "~/ProductForm/product-form"
 
 type ProductTableRowProps = {
-  key: string,
+  key: number,
   item: Product
 }
 export function ProductTableRow({ key, item }: ProductTableRowProps) {
   const dispatch = useAppDispatch()
+  const [open, setOpen] = useState(false)
 
 
-  const deleteProduct = (name: string) => {
-    dispatch(fetchDeleteProduct(name))
-  }
-
-  const addProduct = (item: Product) => {
-    dispatch(fetchAddProduct(item))
-  }
-
-  const updateProduct = (item: Product) => {
-    dispatch(fetchUpdateProduct(item))
+  const deleteItem = (id: number) => {
+    dispatch(deleteProduct(id))
   }
 
   const allergenChip = (allergen: Allergen) => {
@@ -41,6 +36,15 @@ export function ProductTableRow({ key, item }: ProductTableRowProps) {
         {item.allergens.map((allergen) => allergenChip(allergen))}
       </TableCell>
       <TableCell align="center">{item.price}</TableCell>
+      <TableCell align="center">
+        <ProductForm item={item} open={open} setOpen={setOpen} isAdd={false}/>
+      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+        Edit
+      </Button>
+      <Button variant="contained" color="secondary" onClick={() => deleteItem(item.id)}>
+        Delete
+      </Button>
+      </TableCell>
     </TableRow>
   );
 }

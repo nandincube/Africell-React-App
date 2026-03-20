@@ -1,21 +1,19 @@
-import { Alert, Grid, Typography, type AlertProps } from "@mui/material";
+import { Alert, Button, Grid, Typography, type AlertProps } from "@mui/material";
 import { useEffect, useState } from "react";
-import type {Products} from "~/interfaces/Product";
+import type { Products } from "~/interfaces/Product";
 import { ProductTable } from "~/productTable/product-table";
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { fetchAllProducts } from "~/state/productsSlice";
+import { fetchAllProducts } from "~/state/asyncThunks/productsSliceAsync";
+import { ProductForm } from "~/ProductForm/product-form";
 
 
 export default function ProductsPage() {
   const [displayAlert, setDisplayAlert] = useState<boolean>(false);
   const [alertStatus, setAlertStatus] = useState<AlertProps['severity']>('success');
   const [alertMessage, setAlertMessage] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
   const data = useAppSelector((state) => state.products);
-  const dispatch = useAppDispatch()
-
-  useEffect(()=>{
-    dispatch(fetchAllProducts())
-  },[dispatch])
+  
 
   const showAlert = (status: AlertProps['severity'], message: string) => {
     setAlertStatus(status);
@@ -36,7 +34,11 @@ export default function ProductsPage() {
           </header>
           <section>
             {data &&
-            <ProductTable products={data} />}
+              <>
+              <ProductForm open={open} setOpen={setOpen} isAdd={true}/>
+              <Button variant="contained" color="primary" onClick={() => setOpen(true)}>Add</Button>
+                <ProductTable products={data} />
+              </>}
           </section>
         </Grid>
       </div>

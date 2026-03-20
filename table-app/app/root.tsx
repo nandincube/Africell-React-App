@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 import { Provider } from 'react-redux'
-import { store } from "./state/rtk/store";
+import { store } from "./store";
 
 import type { Route } from "./+types/root";
 import "./app.css";
