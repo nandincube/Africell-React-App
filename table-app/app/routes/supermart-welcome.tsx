@@ -7,7 +7,7 @@ import { Link } from "react-router";
 export function SuperMartWelcome() {
   return (
     <main className="flex items-center justify-center pt-16 pb-4 ">
-      <div className="flex-1 flex flex-col items-center justify-center gap-16 min-h-0  h-[80vh]">
+      <div className="flex-1 flex flex-col items-center justify-center gap-16 min-h-0 text-purple-950 h-[80vh]">
         <header>
           <Typography variant="h1">Welcome to the <span className="bg-linear-to-r from-purple-500 to-purple-950 bg-clip-text text-transparent ">Super Mart!</span></Typography>
         </header>

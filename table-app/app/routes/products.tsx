@@ -1,5 +1,5 @@
-import { Alert, Button, Grid, Typography, type AlertProps } from "@mui/material";
-import {  useState } from "react";
+import { Alert, Button, Grid, Tooltip, Typography, type AlertProps } from "@mui/material";
+import { useState } from "react";
 import { ProductTable } from "~/productTable/product-table";
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { ProductForm } from "~/ProductForm/product-form";
@@ -22,15 +22,17 @@ export default function ProductsPage() {
         </header>
         <section className="p-10">
           < div className="flex justify-center">
-          {alertState.displayAlert && <Alert severity={alertState.alertStatus} onClose={() => dispatch(hideAlert())}>{alertState.alertMessage}</Alert>}
+            {alertState.displayAlert && <Alert severity={alertState.alertStatus} onClose={() => dispatch(hideAlert())}>{alertState.alertMessage}</Alert>}
           </div>
           {data &&
             <div className="flex flex-col content-end justify-start gap-2">
               <ProductForm open={open} setOpen={setOpen} isAdd={true} />
               < div className="flex justify-end">
-                <Button className="flex-initial bg-purple-700!" variant="contained" onClick={() => setOpen(true)}>
-                  <AddIcon />
-                </Button>
+                <Tooltip title="Add Product">
+                  <Button className="flex-initial bg-purple-700!" variant="contained" onClick={() => setOpen(true)}>
+                    <AddIcon />
+                  </Button>
+                </Tooltip>
               </div>
               <ProductTable products={data} />
             </div>}

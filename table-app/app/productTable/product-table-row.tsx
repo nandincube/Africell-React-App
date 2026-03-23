@@ -1,4 +1,4 @@
-import { Button, Chip, Stack, TableCell, TableRow } from "@mui/material"
+import { Button, Chip, Stack, TableCell, TableRow, Tooltip } from "@mui/material"
 import type { Allergen } from "../types/Allergen"
 import type { Product } from "../interfaces/Product"
 import { useAppDispatch } from "~/hooks"
@@ -41,7 +41,7 @@ export function ProductTableRow({ item }: ProductTableRowProps) {
       </TableCell>
       <TableCell className="max-w-[10vw] text-wrap" align="center">{item.name}</TableCell>
       <TableCell className="max-h-[5vh]! max-w-[50vw]! whitespace-pre-wrap overflow-auto!" align="left">{item.description}</TableCell>
-      <TableCell className= "w-[20vw]! flex-row overflow-auto!" align="center">
+      <TableCell className="w-[20vw]! flex-row overflow-auto!" align="center">
         {item.allergens.map((allergen) => allergenChip(allergen))}
       </TableCell>
       <TableCell align="center">{new Intl.NumberFormat("en-IN", { minimumSignificantDigits: 3 }).format(
@@ -50,12 +50,16 @@ export function ProductTableRow({ item }: ProductTableRowProps) {
       <TableCell align="center" className="w-[2vw]">
         <ProductForm item={item} open={open} setOpen={setOpen} isAdd={false} />
         <Stack spacing={1} direction="column" justifyContent="center">
-          <Button size="small" variant="contained" className="bg-purple-400!" onClick={() => setOpen(true)}>
-            <EditIcon />
-          </Button>
-          <Button size="small" variant="contained" className="bg-purple-700!" onClick={() => deleteItem(item.id)}>
-            <DeleteIcon />
-          </Button>
+          <Tooltip title="Edit Product">
+            <Button size="small" variant="contained" className="bg-purple-400!" onClick={() => setOpen(true)}>
+              <EditIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Delete Product">
+            <Button size="small" variant="contained" className="bg-purple-700!" onClick={() => deleteItem(item.id)}>
+              <DeleteIcon />
+            </Button>
+          </Tooltip>
         </Stack>
       </TableCell>
     </TableRow>

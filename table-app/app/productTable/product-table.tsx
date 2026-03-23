@@ -10,7 +10,7 @@ import type { ProductTableProps } from '~/types/ProductTableProps';
 
 export function ProductTable({products}: ProductTableProps) {
   return (
-     <TableContainer component={Paper} className="h-[65vh] w-[80vw] mb-10 bg-purple-100! border-purple-400!  border-1">
+     <TableContainer component={Paper} className="h-[65vh] w-[80vw] mb-10 bg-purple-100! border-purple-400! border">
       <Table stickyHeader 
       >
         <TableHead 
