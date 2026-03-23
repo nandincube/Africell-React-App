@@ -39,16 +39,16 @@ export function ProductForm({ item, open, isAdd, setOpen }: ProductFormProps) {
     }
 
     const onSubmit: SubmitHandler<Product> = (data) => {
-        console.log(data)
         if (isAdd) {
             dispatch(addProduct(data))
             dispatch(showAlert({ status: 'success', message: 'Product added successfully' }))
-            reset()
+        
         } else {
             dispatch(updateProduct(data))
             dispatch(showAlert({ status: 'success', message: 'Product updated successfully' }))
-            reset()
+            
         }
+        reset()
         setOpen(false)
 
     }
@@ -60,7 +60,6 @@ export function ProductForm({ item, open, isAdd, setOpen }: ProductFormProps) {
         } else {
             onChange([...allergens, allergen])
         }
-
     }
 
     const handleClose = () => {
@@ -97,7 +96,8 @@ export function ProductForm({ item, open, isAdd, setOpen }: ProductFormProps) {
                                 )}
                                 name="name"
                             />
-                            {errors.name && <span className="text-red-500">Name is required and should be less than 100 characters.</span>}
+                            {errors.name && 
+                            <span className="text-red-500">Name is required and should be less than 100 characters.</span>}
 
 
                             <Controller
@@ -130,7 +130,7 @@ export function ProductForm({ item, open, isAdd, setOpen }: ProductFormProps) {
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
                                     <>
-                                        <label>Price</label>
+                                        <label>Price (£)</label>
                                         <TextField
                                             onBlur={onBlur}
                                             onChange={onChange}
