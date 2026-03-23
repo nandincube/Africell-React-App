@@ -1,13 +1,13 @@
 # Africell-React-App
 
-# Installation and Running
+## Running
 To run locally (dev mode):
 ```
 cd table-app
 npm run dev
 ```
 
-# Technical Stack
+## Technical Stack
 - React
 - Typescript
 - Vite
