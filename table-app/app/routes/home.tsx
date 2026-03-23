@@ -5,8 +5,8 @@ import ProductsPage from "./products";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Products Page" },
+    { name: "description", content: "Products display page" },
   ];
 }
 
