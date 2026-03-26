@@ -1,6 +1,5 @@
 
 import { createSlice } from '@reduxjs/toolkit'
-import type { Products } from '~/interfaces/Product'
 
 
 interface initialState {

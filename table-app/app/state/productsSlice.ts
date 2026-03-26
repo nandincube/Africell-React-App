@@ -10,7 +10,7 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: {
         items: [
-            { id: 1, name: "Nescafe Latte Sachets 12s ", description: "75 Calories Per Mug. Low Fat When Prepared. No Artificial Flavours. Suitable for vegetarians.Every cup you drink can help make a difference This NESCAFÉ Latte is made using 100% responsibly sourced coffee, supporting coffee farmers to improve their lands and livelihoods.", allergens: ["Dairy"], price: 2.50, stock: 40 },
+            { id: 1, name: "Nescafe Latte Sachets 12s ", description: "75 Calories Per Mug. Low Fat When Prepared. No Artificial Flavours. Suitable for vegetarians.Every cup you drink can help make a difference This NESCAFÉ Latte is made using 100% responsibly sourced coffee, supporting coffee farmers to improve their lands and livelihoods.", allergens: ["Dairy", "Peanuts"], price: 2.50, stock: 40 },
             {
                 id: 2,
                 name: "Bonne Maman Sweet and Crunchy Peanut Spread",
